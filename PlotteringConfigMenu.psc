@@ -1,12 +1,12 @@
-Scriptname PlotteringConfigMenu extends SKI_ConfigBase  ;Подключаем SkyUI
+Scriptname PlotteringConfigMenu extends SKI_ConfigBase  ;РџРѕРґРєР»СЋС‡Р°РµРј SkyUI
 
-GlobalVariable Property iCountRepHunting  Auto  ;Глобальные переменные. Кол-во репутации Охотников на Чудовищ и количество бросков в Чашу
+GlobalVariable Property iCountRepHunting  Auto  ;Р“Р»РѕР±Р°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ. РљРѕР»-РІРѕ СЂРµРїСѓС‚Р°С†РёРё РћС…РѕС‚РЅРёРєРѕРІ РЅР° Р§СѓРґРѕРІРёС‰ Рё РєРѕР»РёС‡РµСЃС‚РІРѕ Р±СЂРѕСЃРєРѕРІ РІ Р§Р°С€Сѓ
 GlobalVariable Property iCountDrop  Auto  
 
 Actor Property Player  Auto  
 
 ; SCRIPT VERSION
-int function GetVersion()	;Функция возвращает весрию API
+int function GetVersion()	;Р¤СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‰Р°РµС‚ РІРµСЃСЂРёСЋ API
 	return 4
 endFunction
 
@@ -17,14 +17,14 @@ event OnVersionUpdate(int a_version)
 	endIf
 endEvent
 
-event OnConfigInit()	;Страницы с характеристиками
+event OnConfigInit()	;РЎС‚СЂР°РЅРёС†С‹ СЃ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°РјРё
 	Pages = new string[2]
-	Pages[0] = "Характеристики"
-	Pages[1] = "Репутации"
+	Pages[0] = "РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё"
+	Pages[1] = "Р РµРїСѓС‚Р°С†РёРё"
 
 endEvent
 
-;Список переменных, для хранения данных
+;РЎРїРёСЃРѕРє РїРµСЂРµРјРµРЅРЅС‹С…, РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РґР°РЅРЅС‹С…
 
 int countDrop 
 int countRepHunt
@@ -79,27 +79,27 @@ int playerCritChance
 int playerThingsCritChance
 
 event OnPageReset(string page)
-	if (page == "Характеристики")			;Если открыта страница "Характеристики", то выводим одну информацию
-		SetCursorPosition(0) ;Установка курсора на позицию, где необходимо вывести информацию
-		playerBaseHealth = AddTextOption("Свой уровень жизни: ", Game.GetPlayer().GetBaseAV("Health"))	;Выводим текст и получаем БАЗОВЫЙ уровень жизни персонажа
-		SetCursorPosition(1)		;Ставим курсор на другую позицию
-		playerThingsHealth = AddTextOption("Вещи: ", Game.GetPlayer().GetAV("Health") - Game.GetPlayer().GetBaseAV("Health"))	;Получаем уровень жизни, который дают вещи, зелья и т.д. 
-																																	;Для этого, мы получаем максмально доступный уровень жизни
-																																	;И вычитаем Базовый.
-		SetCursorPosition(2)				;Снова переводим курсор на другую позицию
-		playerHealth = AddTextOption("Текущий уровень жизни: ", Game.GetPlayer().GetAV("Health"))	;Получаем максимальный уровень жизни
+	if (page == "РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё")			;Р•СЃР»Рё РѕС‚РєСЂС‹С‚Р° СЃС‚СЂР°РЅРёС†Р° "РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё", С‚Рѕ РІС‹РІРѕРґРёРј РѕРґРЅСѓ РёРЅС„РѕСЂРјР°С†РёСЋ
+		SetCursorPosition(0) ;РЈСЃС‚Р°РЅРѕРІРєР° РєСѓСЂСЃРѕСЂР° РЅР° РїРѕР·РёС†РёСЋ, РіРґРµ РЅРµРѕР±С…РѕРґРёРјРѕ РІС‹РІРµСЃС‚Рё РёРЅС„РѕСЂРјР°С†РёСЋ
+		playerBaseHealth = AddTextOption("РЎРІРѕР№ СѓСЂРѕРІРµРЅСЊ Р¶РёР·РЅРё: ", Game.GetPlayer().GetBaseAV("Health"))	;Р’С‹РІРѕРґРёРј С‚РµРєСЃС‚ Рё РїРѕР»СѓС‡Р°РµРј Р‘РђР—РћР’Р«Р™ СѓСЂРѕРІРµРЅСЊ Р¶РёР·РЅРё РїРµСЂСЃРѕРЅР°Р¶Р°
+		SetCursorPosition(1)		;РЎС‚Р°РІРёРј РєСѓСЂСЃРѕСЂ РЅР° РґСЂСѓРіСѓСЋ РїРѕР·РёС†РёСЋ
+		playerThingsHealth = AddTextOption("Р’РµС‰Рё: ", Game.GetPlayer().GetAV("Health") - Game.GetPlayer().GetBaseAV("Health"))	;РџРѕР»СѓС‡Р°РµРј СѓСЂРѕРІРµРЅСЊ Р¶РёР·РЅРё, РєРѕС‚РѕСЂС‹Р№ РґР°СЋС‚ РІРµС‰Рё, Р·РµР»СЊСЏ Рё С‚.Рґ. 
+																																	;Р”Р»СЏ СЌС‚РѕРіРѕ, РјС‹ РїРѕР»СѓС‡Р°РµРј РјР°РєСЃРјР°Р»СЊРЅРѕ РґРѕСЃС‚СѓРїРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ Р¶РёР·РЅРё
+																																	;Р РІС‹С‡РёС‚Р°РµРј Р‘Р°Р·РѕРІС‹Р№.
+		SetCursorPosition(2)				;РЎРЅРѕРІР° РїРµСЂРµРІРѕРґРёРј РєСѓСЂСЃРѕСЂ РЅР° РґСЂСѓРіСѓСЋ РїРѕР·РёС†РёСЋ
+		playerHealth = AddTextOption("РўРµРєСѓС‰РёР№ СѓСЂРѕРІРµРЅСЊ Р¶РёР·РЅРё: ", Game.GetPlayer().GetAV("Health"))	;РџРѕР»СѓС‡Р°РµРј РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ Р¶РёР·РЅРё
 		SetCursorPosition(4)
-		AddHeaderOption(" ")			;Добавляем ращделитель, чтоб всё не мешать
+		AddHeaderOption(" ")			;Р”РѕР±Р°РІР»СЏРµРј СЂР°С‰РґРµР»РёС‚РµР»СЊ, С‡С‚РѕР± РІСЃС‘ РЅРµ РјРµС€Р°С‚СЊ
 		SetCursorPosition(5)
 		AddHeaderOption(" ")
 
 
 		SetCursorPosition(6)
-		playerBaseStamina = AddTextOption("Свой уровень энергии: ", Game.GetPlayer().GetBaseAV("Stamina"))
+		playerBaseStamina = AddTextOption("РЎРІРѕР№ СѓСЂРѕРІРµРЅСЊ СЌРЅРµСЂРіРёРё: ", Game.GetPlayer().GetBaseAV("Stamina"))
 		SetCursorPosition(7)
-		playerThingsStamina = AddTextOption("Вещи: ", Game.GetPlayer().GetAV("Stamina") - Game.GetPlayer().GetBaseAV("Stamina"))
+		playerThingsStamina = AddTextOption("Р’РµС‰Рё: ", Game.GetPlayer().GetAV("Stamina") - Game.GetPlayer().GetBaseAV("Stamina"))
 		SetCursorPosition(8)
-		playerStamina = AddTextOption("Текущий уровень энергии: ", Game.GetPlayer().GetAV("Stamina"))
+		playerStamina = AddTextOption("РўРµРєСѓС‰РёР№ СѓСЂРѕРІРµРЅСЊ СЌРЅРµСЂРіРёРё: ", Game.GetPlayer().GetAV("Stamina"))
 		SetCursorPosition(10)
 		AddHeaderOption(" ")
 		SetCursorPosition(11)
@@ -107,11 +107,11 @@ event OnPageReset(string page)
 
 
 		SetCursorPosition(12)
-		playerBaseMagic = AddTextOption("Свой уровень магии: ", Game.GetPlayer().GetBaseAV("Magicka"))
+		playerBaseMagic = AddTextOption("РЎРІРѕР№ СѓСЂРѕРІРµРЅСЊ РјР°РіРёРё: ", Game.GetPlayer().GetBaseAV("Magicka"))
 		SetCursorPosition(13)
-		playerThingsMagic = AddTextOption("Вещи: ", Game.GetPlayer().GetAV("Magicka") - Game.GetPlayer().GetBaseAV("Magicka"))
+		playerThingsMagic = AddTextOption("Р’РµС‰Рё: ", Game.GetPlayer().GetAV("Magicka") - Game.GetPlayer().GetBaseAV("Magicka"))
 		SetCursorPosition(14)
-		playerMagic = AddTextOption("Текущий уровень магии: ", Game.GetPlayer().GetAV("Magicka"))
+		playerMagic = AddTextOption("РўРµРєСѓС‰РёР№ СѓСЂРѕРІРµРЅСЊ РјР°РіРёРё: ", Game.GetPlayer().GetAV("Magicka"))
 		SetCursorPosition(16)
 		AddHeaderOption(" ")
 		SetCursorPosition(17)
@@ -120,33 +120,33 @@ event OnPageReset(string page)
 		
 
 		SetCursorPosition(18)
-		playerBaseRegenHealth = AddTextOption("Свой реген жизни: ", Game.GetPlayer().GetBaseAV("HealRateMult"))
+		playerBaseRegenHealth = AddTextOption("РЎРІРѕР№ СЂРµРіРµРЅ Р¶РёР·РЅРё: ", Game.GetPlayer().GetBaseAV("HealRateMult"))
 		SetCursorPosition(19)
-		playerThingsRegenHealth = AddTextOption("Вещи: ", Game.GetPlayer().GetAV("HealRateMult") - Game.GetPlayer().GetBaseAV("HealRateMult"))
+		playerThingsRegenHealth = AddTextOption("Р’РµС‰Рё: ", Game.GetPlayer().GetAV("HealRateMult") - Game.GetPlayer().GetBaseAV("HealRateMult"))
 		SetCursorPosition(20)
-		playerRegenHealth = AddTextOption("Текущий реген жизни: ", Game.GetPlayer().GetAV("HealRateMult"))
+		playerRegenHealth = AddTextOption("РўРµРєСѓС‰РёР№ СЂРµРіРµРЅ Р¶РёР·РЅРё: ", Game.GetPlayer().GetAV("HealRateMult"))
 		SetCursorPosition(22)
 		AddHeaderOption(" ")
 		SetCursorPosition(23)
 		AddHeaderOption(" ")
 
 		SetCursorPosition(24)
-		playerBaseRegenStamina = AddTextOption("Свой реген энергии: ", Game.GetPlayer().GetBaseAV("StaminaRateMult"))
+		playerBaseRegenStamina = AddTextOption("РЎРІРѕР№ СЂРµРіРµРЅ СЌРЅРµСЂРіРёРё: ", Game.GetPlayer().GetBaseAV("StaminaRateMult"))
 		SetCursorPosition(25)
-		playerThingsRegenStamina = AddTextOption("Вещи: ", Game.GetPlayer().GetAV("StaminaRateMult") - Game.GetPlayer().GetBaseAV("StaminaRateMult"))
+		playerThingsRegenStamina = AddTextOption("Р’РµС‰Рё: ", Game.GetPlayer().GetAV("StaminaRateMult") - Game.GetPlayer().GetBaseAV("StaminaRateMult"))
 		SetCursorPosition(26)
-		playerRegenStamina = AddTextOption("Текущий реген энергии: ", Game.GetPlayer().GetAV("StaminaRateMult"))
+		playerRegenStamina = AddTextOption("РўРµРєСѓС‰РёР№ СЂРµРіРµРЅ СЌРЅРµСЂРіРёРё: ", Game.GetPlayer().GetAV("StaminaRateMult"))
 		SetCursorPosition(28)
 		AddHeaderOption(" ")
 		SetCursorPosition(29)
 		AddHeaderOption(" ")
 
 		SetCursorPosition(30)
-		playerBaseRegenMagic = AddTextOption("Свой реген магии: ", Game.GetPlayer().GetBaseAV("MagickaRateMult"))
+		playerBaseRegenMagic = AddTextOption("РЎРІРѕР№ СЂРµРіРµРЅ РјР°РіРёРё: ", Game.GetPlayer().GetBaseAV("MagickaRateMult"))
 		SetCursorPosition(31)
-		playerThingsRegenMagic = AddTextOption("Вещи: ", Game.GetPlayer().GetAV("MagickaRateMult") - Game.GetPlayer().GetBaseAV("MagickaRateMult"))
+		playerThingsRegenMagic = AddTextOption("Р’РµС‰Рё: ", Game.GetPlayer().GetAV("MagickaRateMult") - Game.GetPlayer().GetBaseAV("MagickaRateMult"))
 		SetCursorPosition(32)
-		playerRegenMagic = AddTextOption("Текущий реген магии: ", Game.GetPlayer().GetAV("MagickaRateMult"))
+		playerRegenMagic = AddTextOption("РўРµРєСѓС‰РёР№ СЂРµРіРµРЅ РјР°РіРёРё: ", Game.GetPlayer().GetAV("MagickaRateMult"))
 		SetCursorPosition(34)
 		AddHeaderOption(" ")
 		SetCursorPosition(35)
@@ -155,22 +155,22 @@ event OnPageReset(string page)
 
 
 		SetCursorPosition(36)
-		playerBaseMagicResist = AddTextOption("Своё сопротивление магии: ", Game.GetPlayer().GetBaseAV("MagicResist"))
+		playerBaseMagicResist = AddTextOption("РЎРІРѕС‘ СЃРѕРїСЂРѕС‚РёРІР»РµРЅРёРµ РјР°РіРёРё: ", Game.GetPlayer().GetBaseAV("MagicResist"))
 		SetCursorPosition(37)
-		playerThingsMagicResist = AddTextOption("Вещи: ", Game.GetPlayer().GetAV("MagicResist") - Game.GetPlayer().GetBaseAV("MagicResist"))
+		playerThingsMagicResist = AddTextOption("Р’РµС‰Рё: ", Game.GetPlayer().GetAV("MagicResist") - Game.GetPlayer().GetBaseAV("MagicResist"))
 		SetCursorPosition(38)
-		playerMagicResist = AddTextOption("Текущее сопротивление магии: ", Game.GetPlayer().GetAV("MagicResist"))
+		playerMagicResist = AddTextOption("РўРµРєСѓС‰РµРµ СЃРѕРїСЂРѕС‚РёРІР»РµРЅРёРµ РјР°РіРёРё: ", Game.GetPlayer().GetAV("MagicResist"))
 		SetCursorPosition(40)
 		AddHeaderOption(" ")
 		SetCursorPosition(41)
 		AddHeaderOption(" ")
 
 		SetCursorPosition(42)
-		playerBaseDamageResist = AddTextOption("Своё сопротивление физ.урону: ", Game.GetPlayer().GetBaseAV("DamageResist"))
+		playerBaseDamageResist = AddTextOption("РЎРІРѕС‘ СЃРѕРїСЂРѕС‚РёРІР»РµРЅРёРµ С„РёР·.СѓСЂРѕРЅСѓ: ", Game.GetPlayer().GetBaseAV("DamageResist"))
 		SetCursorPosition(43)
-		playerThingsDamageResist = AddTextOption("Вещи: ", Game.GetPlayer().GetAV("DamageResist") - Game.GetPlayer().GetBaseAV("DamageResist"))
+		playerThingsDamageResist = AddTextOption("Р’РµС‰Рё: ", Game.GetPlayer().GetAV("DamageResist") - Game.GetPlayer().GetBaseAV("DamageResist"))
 		SetCursorPosition(44)
-		playerDamageResist = AddTextOption("Текущее сопротивление физ.урону: ", Game.GetPlayer().GetAV("DamageResist"))
+		playerDamageResist = AddTextOption("РўРµРєСѓС‰РµРµ СЃРѕРїСЂРѕС‚РёРІР»РµРЅРёРµ С„РёР·.СѓСЂРѕРЅСѓ: ", Game.GetPlayer().GetAV("DamageResist"))
 		SetCursorPosition(46)
 		AddHeaderOption(" ")
 		SetCursorPosition(47)
@@ -179,11 +179,11 @@ event OnPageReset(string page)
 
 
 		SetCursorPosition(48)
-		playerBaseCarryWeight = AddTextOption("Свой максимальный вес: ", Game.GetPlayer().GetBaseAV("CarryWeight"))
+		playerBaseCarryWeight = AddTextOption("РЎРІРѕР№ РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РІРµСЃ: ", Game.GetPlayer().GetBaseAV("CarryWeight"))
 		SetCursorPosition(49)
-		playerThingsCarryWeight = AddTextOption("Вещи: ", Game.GetPlayer().GetAV("CarryWeight") - Game.GetPlayer().GetBaseAV("CarryWeight"))
+		playerThingsCarryWeight = AddTextOption("Р’РµС‰Рё: ", Game.GetPlayer().GetAV("CarryWeight") - Game.GetPlayer().GetBaseAV("CarryWeight"))
 		SetCursorPosition(50)
-		playerCarryWeight = AddTextOption("Текущий максимальный вес: ", Game.GetPlayer().GetAV("CarryWeight"))
+		playerCarryWeight = AddTextOption("РўРµРєСѓС‰РёР№ РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РІРµСЃ: ", Game.GetPlayer().GetAV("CarryWeight"))
 		SetCursorPosition(52)
 		AddHeaderOption(" ")
 		SetCursorPosition(53)
@@ -193,11 +193,11 @@ event OnPageReset(string page)
 
 		
 		SetCursorPosition(54)
-		playerBaseCritChance = AddTextOption("Свой шанс крита: ", Game.GetPlayer().GetBaseAV("CritChance"))
+		playerBaseCritChance = AddTextOption("РЎРІРѕР№ С€Р°РЅСЃ РєСЂРёС‚Р°: ", Game.GetPlayer().GetBaseAV("CritChance"))
 		SetCursorPosition(55)
-		playerThingsCritChance = AddTextOption("Вещи: ", Game.GetPlayer().GetAV("CritChance") - Game.GetPlayer().GetBaseAV("CritChance"))
+		playerThingsCritChance = AddTextOption("Р’РµС‰Рё: ", Game.GetPlayer().GetAV("CritChance") - Game.GetPlayer().GetBaseAV("CritChance"))
 		SetCursorPosition(56)
-		playerCritChance = AddTextOption("Текущий шанс крита: ", Game.GetPlayer().GetAV("CritChance"))
+		playerCritChance = AddTextOption("РўРµРєСѓС‰РёР№ С€Р°РЅСЃ РєСЂРёС‚Р°: ", Game.GetPlayer().GetAV("CritChance"))
 		SetCursorPosition(58)
 		AddHeaderOption(" ")
 		SetCursorPosition(59)
@@ -206,25 +206,25 @@ event OnPageReset(string page)
 
 
 		SetCursorPosition(60)
-		countDrop = AddTextOption("Бросков в Чашу: ", iCountDrop.GetValueInt())
+		countDrop = AddTextOption("Р‘СЂРѕСЃРєРѕРІ РІ Р§Р°С€Сѓ: ", iCountDrop.GetValueInt())
 		SetCursorPosition(62)
 		AddHeaderOption(" ")
 		SetCursorPosition(63)
 		AddHeaderOption(" ")
 		; Add page 1 options
 
-	elseIf (page == "Репутации")			;Или если открыта страница с Репутациями, то выводим информацию о текущем уровне репутации Игрока
+	elseIf (page == "Р РµРїСѓС‚Р°С†РёРё")			;РР»Рё РµСЃР»Рё РѕС‚РєСЂС‹С‚Р° СЃС‚СЂР°РЅРёС†Р° СЃ Р РµРїСѓС‚Р°С†РёСЏРјРё, С‚Рѕ РІС‹РІРѕРґРёРј РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ С‚РµРєСѓС‰РµРј СѓСЂРѕРІРЅРµ СЂРµРїСѓС‚Р°С†РёРё РРіСЂРѕРєР°
 		; Add page 2 options
-		countRepHunt = AddTextOption("Репутация Охотников на Чудовищь: ", iCountRepHunting.GetValueInt())
+		countRepHunt = AddTextOption("Р РµРїСѓС‚Р°С†РёСЏ РћС…РѕС‚РЅРёРєРѕРІ РЅР° Р§СѓРґРѕРІРёС‰СЊ: ", iCountRepHunting.GetValueInt())
 
 	endIf
 endEvent
 
 event OnOptionSelect(int option)
-	if (CurrentPage == "Характеристики")
+	if (CurrentPage == "РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё")
 		
 		
-	elseIf (CurrentPage == "Репутации")
+	elseIf (CurrentPage == "Р РµРїСѓС‚Р°С†РёРё")
 		
 		
 	endIf
